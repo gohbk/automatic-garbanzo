@@ -30,7 +30,7 @@ jobs: # job to execute
       
     - name: Install dependencies
       run: |
-        go mod init calc
+        go mod init calc # Add go mod and go sum file. So when we use go build, we can omit line 33 - 35
         go mod tidy
         go get github.com/franela/goblin
         go test -v
