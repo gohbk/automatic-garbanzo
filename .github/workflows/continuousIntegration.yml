@@ -46,7 +46,7 @@ jobs: # job to execute
         go mod init calc # Add go mod and go sum file. So when we use go build, we can omit line 33 - 35
         go mod tidy
         go get github.com/franela/goblin
-        go get github.com/tebeka/go2xunit # https://github.com/tebeka/go2xunit
+        go install github.com/tebeka/go2xunit # https://github.com/tebeka/go2xunit
         go test -v
         go test -v | go2xunit -output tests.xml # generate xml file
         
