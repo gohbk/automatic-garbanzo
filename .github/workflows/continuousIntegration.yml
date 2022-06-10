@@ -46,4 +46,22 @@ jobs: # job to execute
         go mod init calc # Add go mod and go sum file. So when we use go build, we can omit line 33 - 35
         go mod tidy
         go get github.com/franela/goblin
+        go get github.com/tebeka/go2xunit # https://github.com/tebeka/go2xunit
         go test -v
+        go test -v | go2xunit -output tests.xml # generate xml file
+        
+    - name: Publish Test Results # https://github.com/EnricoMi/publish-unit-test-result-action
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: always() # continue regardless the previous build is successful or has failed
+      with:
+        files: tests.xml
+        
+    - if: ${{ failure() }} # if something went wrong
+      uses: nashmaniac/create-issue-action@v1.1 # https://github.com/nashmaniac/create-issue-action
+      name: Create Issue Action
+      with:
+        title: Build Failed
+        token: ${{secrets.GITHUB_TOKEN}} # your own github token to access to repo itself
+        assignees: ${{github.actor}}
+        labels: worflow-failed
+        body: Workflow failed for commit ${{github.sha}} # commit id
