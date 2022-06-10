@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2.4.2
-    
+
       - name: Setup Go
         uses: actions/setup-go@v3.2.0
         with:
@@ -21,8 +21,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          go mod init calc # Add go mod and go sum file. So when we use go build, we can omit line 33 - 35
+          go mod init
           go mod tidy
+          go get github.com/franela/goblin
         
       - name: Run GoReleaser # https://github.com/goreleaser/goreleaser-action
         uses: goreleaser/goreleaser-action@v3
