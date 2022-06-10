@@ -6,7 +6,7 @@ on: # for event triggering
     branches: [main]
     
 jobs: # job to execute
-  build: # name of the job
+  build: # name of the job, build is a customised name eg. job1, job2
     name: Load OS # name for printing
     runs-on: ubuntu-latest # specify os in virtual machine
     steps:
