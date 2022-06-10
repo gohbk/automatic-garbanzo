@@ -65,3 +65,13 @@ jobs: # job to execute
         assignees: ${{github.actor}}
         labels: worflow-failed
         body: Workflow failed for commit ${{github.sha}} # commit id
+        
+    - if: ${{ failure() }}
+      uses: kaviadigdarshan/whatsapp-actions@v1.1        
+      name: Whatsapp Actions for Github
+      env:
+          ACCOUNT_SID: ${{ secrets.ACCOUNT_SID }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          TO_WHATSAPP_NUMBER: ${{ secrets.TO_WHATSAPP_NUMBER }}
+        
+      
